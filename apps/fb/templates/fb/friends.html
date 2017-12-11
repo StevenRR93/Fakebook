@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fakebook - {{thisuser.first_name}} {{thisuser.last_name}}</title>
+    {% load static %}
+    <link rel="shortcut icon" href= {% static "favicon.ico" %} />
+    <style type="text/css">
+    *{
+        font-size: 18px; 
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
+    .fakebook_logo{
+        font-size: 30px;
+        text-decoration: none;
+        color : white !important;
+        font-weight: bold;
+    }
+    .navbar-nav>li>a {
+        color : white !important;
+    }
+    #nav_bar{
+        color: white;
+        background: #3b5998; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(top, #4e69a2, #3b5998);
+        background: -o-linear-gradient(#4e69a2, #3b5998);
+        background: -moz-linear-gradient(top, #4e69a2, #3b5998);
+        background: linear-gradient(to bottom, #4e69a2, #3b5998);
+    }
+    #left_area{
+        padding-left: 10px;
+        width: 225px;
+        min-height: 800px;
+        float: left;
+        border-right: 1px solid black;
+    }
+    .images{
+        margin-left: 30px;
+    }
+    #mid_area{
+        width: 500px;
+        min-height: 800px;
+        padding-left: 20px;
+        float: left;
+        border-left: 1px solid black;
+    }
+    .smalltext{
+        font-size: 12px;
+    }
+    #right_area{
+        width: 200px;
+        min-height: 800px;
+        float: right;
+    }
+    .images{
+        height: 100px;
+        width: 100px;
+    }
+    </style>
+</head>
+<body>
+        <nav id = "nav_bar" class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand fakebook_logo" color = "white" href="/home">fakebook</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/friendslist/{{currentuser.id}}" >Friends </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/message/{{currentuser.id}}">Messages</a>
+                    </li>
+                    <form class="form-inline my-2 my-lg-0" action="/search/" method="GET">
+                        <input class="form-control mr-sm-2" type="text" name = "search" placeholder="Search" aria-label="Search">
+                    </form>
+                    <li class="nav-item dropdown justify-content-between ml-auto">
+                      <a class="nav-link dropdown-toggle navbar-right" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                      </a>
+                      <div class="dropdown-menu ml-auto" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/users/{{currentuser.id}}">Profile</a>
+                        <a class="dropdown-item" href="/edit/{{currentuser.id}}">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">Log Out</a>
+                      </div>
+                    </li>
+                    
+                  </ul>
+                  
+                </div>
+              </nav>
+<div id = "left_area">
+    <h1><a href="/users/{{thisuser.id}}">{{thisuser.first_name}} {{thisuser.last_name}}</a></h1>
+    {% load static %}
+    {% if thisuser.gender == "female" %}
+    <img class = "images" src= {% static "female_profile_picture.png" %} alt="Profile Pic ">
+    {% else %}
+    <img class = "images" src= {% static "male_profile_image.jpg" %} alt="Profile Pic ">
+    {% endif %}
+    <p>Infomation:</p>
+    {% if thisuser.job|length > 0 %} {% if thisuser.workplace|length > 0 %}
+        <p>{{thisuser.job} at {{thisuser.workplace}</p>
+    {% endif %} {% endif %}
+    {% if thisuser.education|length > 0 %}
+        <p>Studied at {{thisuser.education}</p>
+    {% endif %}
+    {% if thisuser.location|length > 0 %}
+        <p>Lives at {{thisuser.location}</p>
+    {% endif %}
+    {% if thisuser.birthplace|length > 0%}
+        <p>{{thisuser.birthplace}</p>
+    {% endif %}
+    <br>
+    <p>Friends:</p>
+    {% if myfriends|length > 0%}
+        {% for f in myfriends%}
+            <p><a>{{myfriends.name}}</a></p>
+        {% endfor%}
+    {% else %}
+        <p>You have no friends to display.</p>
+    {% endif %}
+</div>
+<div id = "mid_area">
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if friends_list|length > 0 %}
+    {% for friends in friends_list %}
+        <p>{{friends.first_name}} {{friends.last_name}}<p>
+    {% endfor %}
+{% else %}
+    <p>{{thisuser.first_name}} {{thisuser.last_name}} does not have any friends to display</p>
+{% endif %}
+</div>
+<div id = "right_area">
+    <h4>Online friends</h4>
+    {% if friends|length > 0 %}
+        {% for friend in online_friends %}
+
+        {%endfor%}
+    {% else %}
+        <p>No friends currently online</p>
+    {% endif%}
+</div>
+</body>
+</html>

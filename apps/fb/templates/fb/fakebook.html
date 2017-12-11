@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Fakebook - Log In or Sign Up</title>
+    {% load static %}
+    <link rel="shortcut icon" href= {% static "favicon.ico" %} />
+  <!--<link rel="stylesheet" href="stylesheet.css" type="text/css">-->
+  <style type="text/css">
+        *{
+            margin: 0px;
+            font-size: 18px; 
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        }
+        .fakebook_logo a{
+            margin-top: 20px;
+            float: left;
+            font-size: 40px;
+            height: 50px;
+            text-decoration: none;
+            color: white;
+        }
+        .form_field{
+            text-align: left;
+            margin: 0px, 5px, 0px, 5px;
+            font-size: 12px;
+            color: white;
+            width: 150px;
+        }
+        .form_field a{
+            size: 12px;
+            color: #a0b3e7;
+            text-decoration: none;
+        }
+        .text_field{
+            width: 150px;
+            height: 18px;
+            size: 12px;
+            font-size: 12px;
+            border: 1px solid black
+        }
+        .content_area{
+            margin: 0px auto;
+            float: center;
+            width: 1000px;
+        }
+        #subbutton{
+            background-color: #4267b2;
+            border: 1px solid black;
+            color: white;
+            font-size: 14px;
+        }
+        #sign_in{
+            margin-top: 10px;
+            width: 400px;
+            height: 80px;
+            float: right;
+            font-size: 14px;
+        }
+        #top_area{
+            margin: 0px auto;
+            height: 75px; 
+            padding: 2px; 
+            display: block;
+            border-bottom: .1px solid black;
+            background: #3b5998; /* For browsers that do not support gradients */
+            background: -webkit-linear-gradient(top, #4e69a2, #3b5998);
+            background: -o-linear-gradient(#4e69a2, #3b5998);
+            background: -moz-linear-gradient(top, #4e69a2, #3b5998);
+            background: linear-gradient(to bottom, #4e69a2, #3b5998);
+        }
+        #mid_area{
+            margin: 0px auto;
+            height: 610px;
+            padding: 0px;
+            display: block;
+            background-color: #edf0f5;
+        }
+        #left_side{
+            margin-top: 50px;
+            width: 45%;
+            float: left;
+        }
+        .textf1{
+            margin: 0px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+        .textf2{
+            font-size: 16px;
+            margin-top: 35px;
+        }
+        #cabutton{
+            padding: 10px 40px 10px 40px;
+            background-color: #5f9a4c;
+            background-image: -webkit-linear-gradient(#71b55d, #588a44);
+            background: -o-linear-gradient(#71b55d, #588a44);
+            background-image: -moz-linear-gradient(#71b55d, #588a44);
+            background-image: linear-gradient(#71b55d, #588a44);
+            border: 1px solid black;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+        }
+        .name_field{
+            padding-left: 10px;
+            height: 30px;
+            width: 180px;
+            border-radius: 5px;
+            box-shadow: None;
+            text-align: left;
+            font-size: 14px;
+            color: black;
+        }
+        .other_fields{
+            padding-left: 10px;
+            height: 30px;
+            width: 380px;
+            border-radius: 5px;
+            box-shadow: None;
+            text-align: left;
+            font-size: 14px;
+            color: black;
+        }
+        .image{
+            width: 30px;
+            height: 30px;
+        }
+        .lowercase{
+            font-weight:normal;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        #bday{
+            font-size: 10px;
+            color: blue;
+        }
+        #bday:hover{
+            text-decoration: underline;
+        }
+        #right_side{
+            width: 45%;
+            float: right;
+        }
+        .warning{
+            margin: 5px;
+            font-size: 10px;
+        }
+        .messages{
+            color: red;
+        }
+        #bottom_area{
+            margin: 0px auto;
+            width: 65%;
+        }
+        .bottom_field{
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            size: 12px;
+        }
+        #bottom_table{
+            size: 10px; 
+            width: 100%;
+        }
+        #bottom_table tr{
+            margin: 5px;
+        }
+        #copyright{
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 10px;
+        }
+  </style>
+  <script>
+      function bday(){
+        alert("Providing your birthday helps make sure you get the right Fakebook experience for your age. If you want to change who sees this, go to the About section of your profile. For more details, please visit our Data Policy.");
+      }
+  </script>
+  </head>
+  <body>
+    
+    <div id = 'top_area'>
+        <div class = "content_area">
+        <h1 class = 'fakebook_logo'><a href = "/fakebook">fakebook</a></h1>
+        <div id = "sign_in">
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <table id = "form_field" size = "10px" style="width:100%">
+                    <tr>
+                        <th class = "form_field">E-mail:</th>
+                        <th class = "form_field">Password:</th> 
+                        <th class = "form_field"></th>
+                        </tr>
+                    <tr>
+                        <td class = "form_field"><input class="text_field" type="text" name="email"></td>
+                        <td class = "form_field"><input class="text_field" type="text" name="password"></td> 
+                        <td class = "form_field"><input id = "subbutton" type="submit" value="Log In"></td>
+                    </tr>
+                    <tr>
+                        <td class = "form_field"></td>
+                        <td class = "form_field"><a style="font-size: 12px" href = "/forgot_info">Forgot Account?</a></td> 
+                        <td class = "form_field"></td>
+                    </tr>
+                  </table>
+            </form>
+        </div>
+        </div>
+    </div>
+    <div id = 'mid_area'>
+        <div class = "content_area">
+        <div id = 'left_side'>
+                <h2 class = "textf1">Connect with friends and the</h2>
+                <h2 class = "textf1">world around you on Fakebook.</h2>
+                {% load static %}
+                <h4 class = "textf2"><img class = "images" src= {% static "img1.png" %} alt="Image 1 "> See photos and updates <span class = "lowercase"> from friends in News Feed.</spaN></h4>
+                <h4 class = "textf2"><img class = "images" src= {% static "img2.png" %} alt="Image 2 "> Share what's new <span class = "lowercase"> in your life on your Timeline.</spaN></h4>
+                <h4 class = "textf2"><img class = "images" src= {% static "img3.png" %} alt="Image 3 "> Find more <span class = "lowercase"> of what you're looking for with Fakebook Search.</spaN></h4>
+        </div>
+        <div id = 'right_side'>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <h1 class = "textf1"> Sign Up,</h1>
+        <h1>It's free and always will be.</h1>
+
+        <form action="/register" method="POST">
+            {% csrf_token %}
+            <input type="text" class = "name_field" name="first_name" placeholder="First name">
+            <input type="text" class = "name_field" name="last_name" placeholder="Last name"><br><br>
+            <input type="text" class = "other_fields" name="email" placeholder="E-mail">
+            <br><br> 
+            <input type="text" class = "other_fields" name="password" placeholder="New password">
+            <br><br>
+            <input type="text" class = "other_fields" name="confirmpw" placeholder="Confirm Password">
+            <br><br>
+            Birthday:<br>
+            <input type="date" name="birthday"><span onclick="bday()" id = "bday">Why do I need to provide my birthday?</span>
+            <br><br>
+            <input type="radio" name="gender" value="male"> Male
+            <input type="radio" name="gender" value="female"> Female
+            <input type="radio" name="gender" value="other"> Other
+            <p class = "warning">By clicking Create Account, you agree to our Terms</p>
+            <p class = "warning">and that you have read our Data Policy, including our Cookie Use. You may</p>
+            <p class = "warning">receive SMS Notifications from Facebook and can opt out at any time.</p>
+            <input id = "cabutton" type="submit" value="Create Account">
+        </form> <br>
+        </div>
+        </div>
+      </div>
+      <div id = "bottom_area">
+            <p class = "bottom_field">English (US) Español Français (France) 中文(简体) العربية Português (Brasil) Italiano 한국어 Deutsch हिन्दी日本語</p>
+            <table id = "bottom_table" >
+                <tr>
+                    <td class = "bottom_field">Sign Up</td>
+                    <td class = "bottom_field">Log In</td> 
+                    <td class = "bottom_field">Facebook Lite</td>
+                    <td class = "bottom_field">Mobile</td>
+                    <td class = "bottom_field">Find</td>
+                    <td class = "bottom_field">Friends</td>
+                    <td class = "bottom_field">People</td>
+                    <td class = "bottom_field">Pages</td>
+                    <td class = "bottom_field">Places</td>
+                    <td class = "bottom_field">Games</td>
+                    <td class = "bottom_field">Locations</td>
+                </tr>
+                <tr>
+                    <td class = "bottom_field">Celebrities</td>
+                    <td class = "bottom_field">Marketplace</td> 
+                    <td class = "bottom_field">Groups</td>
+                    <td class = "bottom_field">Recipes</td>
+                    <td class = "bottom_field">Sports</td>
+                    <td class = "bottom_field">Look</td>
+                    <td class = "bottom_field">Moments</td>
+                    <td class = "bottom_field">Instagram</td>
+                    <td class = "bottom_field">About</td>
+                    <td class = "bottom_field">Create Ad</td>
+                    <td class = "bottom_field">Create Page</td>
+                </tr>
+                <tr>
+                    <td class = "bottom_field">Developers</td>
+                    <td class = "bottom_field">Careers</td> 
+                    <td class = "bottom_field">Privacy</td>
+                    <td class = "bottom_field">Cookies</td>
+                    <td class = "bottom_field">Ad Choices</td>
+                    <td class = "bottom_field">Terms</td>
+                    <td class = "bottom_field">Help</td>
+                    <td class = "bottom_field">Settings</td>
+                    <td class = "bottom_field">Activity Log</td>
+                    <td class = "bottom_field"></td>
+                    <td class = "bottom_field"></td>
+                </tr>
+            </table>
+            <p id = "copyright">@StevenRamirez/DavidWilliams</p>
+      </div>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Login/Registration</title>
+  <!--<link rel="stylesheet" href="stylesheet.css" type="text/css">-->
+  <style type="text/css">
+        *{
+           font-size: 18px; 
+        }
+        .heading{
+            display: block;
+            align-self: auto;
+            font-size: 40px;
+            height: 50px; 
+        }
+        #left_area{
+            margin: 1px auto;
+            padding: 2px;
+            width: 48%; 
+            display: inline-block;
+            text-align: center;
+            border: 1px solid black;
+        }
+        #right_area{
+            margin: 1px auto;
+            padding: 2px;
+            width: 48%; 
+            display: inline-block;
+            text-align: center;
+            vertical-align: top;
+            border: 1px solid black;
+        }
+        .messages{
+            color: red;
+        }
+  </style>
+  
+  </head>
+  <body>
+    <h1 class = 'heading'>Welcome to Fakebook</h1>
+      <div id = 'left_area'>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <h1 class = 'heading'> Registration for new users</h1>
+        <form action="/register" method="POST">
+            {% csrf_token %}
+            First name: 
+            <input type="text" name="first_name">
+            <br><br>
+            Last name: 
+            <input type="text" name="last_name">
+            <br><br>
+            E-mail: 
+            <input type="text" name="email">
+            <br><br>
+            Password: 
+            <input type="text" name="password">
+            <br><p>*Password should be more than 8 characters</p><br>
+            Confirm Password: 
+            <input type="text" name="confirmpw">
+            <br><br>
+            Date of Birth:
+            <input type="date" name="birthday">
+            <br><br>
+            <input type="submit" value="Register">
+        </form> <br>
+      </div>
+      <div id = 'right_area'>
+        <h1 class = 'heading'> Login for existing users</h1>
+        <form action="/login" method="POST">
+            {% csrf_token %}
+            E-mail:<br>
+            <input type="text" name="email">
+            <br><br>
+            Password:<br>
+            <input type="text" name="password">
+            <br><br>
+            <input type="submit" value="Login">
+        </form> <br>
+      </div>
+  </body>
+</html>
